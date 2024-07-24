@@ -1,17 +1,16 @@
 import gradio as gr
 import tensorflow as tf
 import numpy as np
+from PIL import Image
 
 # Load your saved MNIST model
-model = tf.keras.models.load_model("mnist_digit_classification_model.h5")
+model = tf.keras.models.load_model('mnist_digit_classification_model.h5')
 
 # Define the prediction function
 def predict_digit(image):
-    # Preprocess the image to match the input format of the model
-    image = image.convert('L')  # Convert to grayscale
-    image = image.resize((28, 28))  # Resize to 28x28 pixels
-    image = np.array(image)  # Convert to numpy array
-    image = image / 255.0  # Normalize the image
+    # Convert to grayscale and resize to 28x28
+    image = Image.fromarray(image).convert('L').resize((28, 28))
+    image = np.array(image) / 255.0  # Normalize the image
     image = image.reshape(1, 28, 28, 1)  # Reshape to match model input
     
     # Get the model's prediction
@@ -20,9 +19,11 @@ def predict_digit(image):
     return predicted_digit
 
 # Create the Gradio interface
-interface = gr.Interface(fn=predict_digit,
-                         inputs=gr.inputs.Sketchpad(shape=(28, 28)),
-                         outputs=gr.outputs.Label(num_top_classes=1))
+interface = gr.Interface(
+    fn=predict_digit,
+    inputs=gr.inputs.Sketchpad(shape=(28, 28)),
+    outputs="label",
+)
 
 # Launch the interface
 interface.launch()
