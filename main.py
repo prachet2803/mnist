@@ -3,7 +3,7 @@ import tensorflow as tf
 import numpy as np
 
 # Load your saved MNIST model
-model = tf.keras.models.load_model("C:/Users/prachet/OneDrive - Vidyalankar Institute of Technology/Desktop/Coding/Machine Learning/DEEP LEARNING/DL Project 2. MNIST Digit Classification with Neural Network/Proper/mnist_digit_classification_model.h5")
+model = tf.keras.models.load_model("mnist_digit_classification_model.h5")
 
 # Define the prediction function
 def predict_digit(image):
