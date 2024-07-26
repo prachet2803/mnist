@@ -1,3 +1,7 @@
-gradio==2.9.4
+streamlit
 tensorflow
+opencv-python
+numpy
+Pillow
 streamlit-drawable-canvas
+
